@@ -18,12 +18,23 @@
       }
       .send-message {
         width: 100%;
-        input {
-          width: 100%;
-          height: 30px;
-          max-height: 30px;
-          min-height: 30px;
-        }
+          input {
+            width: 90%;
+            height: 30px;
+            max-height: 30px;
+            min-height: 30px;
+            float: left;
+          }
+            button {
+              
+              width: 10%;
+              background-color: blue;
+              color: white;
+              padding: 7px;
+              font-size: 16px;
+              position: absolute;
+          }
+        
       }
     }
   }
