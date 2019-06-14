@@ -19,6 +19,15 @@ class App extends React.Component {
   this.onReceived()
   this.onJoined()
   this.onLeave()
+  this.onTypingFromMember()
+}
+
+onTypingFromMember() {
+  socket.on('member_typing', (user) => {
+    if(user.userName != this.state.userName) {
+    this.setMessage(`${user.userName} typing...`)
+    }
+  })
 }
 
   onReceived() {
@@ -26,6 +35,8 @@ class App extends React.Component {
       this.setMessage(`${value.userName}: ${value.message}`)
     })
   }
+
+  
 
   onJoined() {
     socket.on('joined', (user) => {
@@ -45,7 +56,7 @@ class App extends React.Component {
 
   setMessage(message) {
     let messages = this.state.receiveMessages
-    messages = messages + '\n' + message
+    messages = message + '\n' + messages
     this.setState({
       receiveMessages: messages
     })
@@ -87,7 +98,11 @@ class App extends React.Component {
       })
     }
   
-
+    onChange = event => {
+      socket.emit('typing', {
+        userName: this.state.userName
+      })
+    }
  
   render() {
     return (
